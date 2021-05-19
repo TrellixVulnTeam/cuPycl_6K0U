@@ -1,4 +1,6 @@
-![Logo](https://github.com/AD2605/cuPycl/cupyclLogo.png)
+<p align="center">
+  <img src = "https://github.com/AD2605/cuPycl/blob/main/cupyclLogo.png">
+</p>
 
 
 # cuPycl
