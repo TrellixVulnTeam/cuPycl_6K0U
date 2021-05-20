@@ -1,3 +1,4 @@
+#include <smmintrin.h>
 #include <x86intrin.h>
 #include "Imaging.h"
 
@@ -23,5 +24,11 @@ void static inline ImagingLineBoxBlur32(UINT32* lineOut, UINT32* lineIn, int las
         __m128i tmp1 = mm_cvtepu8_epi32(&lineIn[add]); \
         __m128i tmp2 = mm_cvtepu8_epi32(&lineIn[subtract]); \ 
         acc = _mm_sub_epi32(_mm_add_epi32(acc, tmp1), tmp2); \
+    }
+
+    #define ADD_FAR (bulk, acc, left, right){
+        __m128i tmp3 = _mm_cvtepu8_epi32(&lineIn[left]);
+        __m128i tmp4 = _mm_cvtepu8_epi32(&lineIn[right]);
+        __m128i tmp5 = _mm_mullo_epi32(_mm_add_epi32(tmp3, tmp4), fws);
     }
 }
