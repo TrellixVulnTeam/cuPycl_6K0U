@@ -13,6 +13,7 @@ __global__ void __cuImagingBoxBlur(const unsigned char* Imin, unsigned char* out
 #define    FILTER_H  (Ry * 2 + 1)
 #define    BLOCK_W   (TILE_W + (2 * Rx))
 #define    BLOCK_H   (TILE_H + (2 * Ry))
+#define    FILTER_SIZE FILTER_W * FILTER_H
 
         const int x = blockIdx.x * TILE_W - Rx; // x Index
         const int y = blockIdx.y * TILE_H - Ry; // y Index
@@ -31,6 +32,7 @@ __global__ void __cuImagingBoxBlur(const unsigned char* Imin, unsigned char* out
         if ((threadIdx.x >= Rx) && (threadIdx.x < (BLOCK_W-Rx)) && (threadIdx.y >= Ry) && (threadIdx.y < (BLOCK_H-Ry))){
             float sum = 0.0f;
             for(int dx = -Rx; dx <= Rx; dx++){
+#pragma unroll
                 for(int dy = -Ry; dy <= Ry; dy++){
                     sum += sharedMemory[threadIdx.x + dx][threadIdx.y + dy];
                         }
