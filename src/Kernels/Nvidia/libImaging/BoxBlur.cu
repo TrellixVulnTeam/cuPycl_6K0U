@@ -4,6 +4,7 @@
 
 
 __global__ void __cuImagingBoxBlur(const unsigned char* Imin, unsigned char* out, const unsigned w, const unsigned h, int n, float radius){
+
 #define    TILE_W  16
 #define    TILE_H  16
 #define    Rx      radius
